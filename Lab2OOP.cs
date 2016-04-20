@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Runtime.CompilerServices;
+using Microsoft.Win32;
 
 namespace Lab2
 {
@@ -166,6 +170,17 @@ namespace Lab2
         }
         #endregion
 
+        #region Переопределить две любых операции.
+        public static int operator +(RList rl1,RList rl2)
+        {
+            return rl1.key + rl2.key;
+        }
+        public static int operator *(RList rl1,RList rl2)
+        {
+            return rl1.key * rl2.key;
+        }
+        #endregion
+
     }
     class Program
     {
@@ -178,7 +193,9 @@ namespace Lab2
             RList.Add(rl, 5);
             RList.Add(rl, 6);
             RList.Add(rl, 7);
-            RList.DeleteNum(rl, 7);
+            RList rl1 = new RList(2);
+            Console.WriteLine(rl + rl1);
+            Console.WriteLine(rl * rl1);
             RList.Print(rl);
         }
     }
