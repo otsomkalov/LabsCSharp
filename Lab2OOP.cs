@@ -13,7 +13,7 @@ namespace Lab2
         {
             get
             {
-                int a = 0;
+                int a = -1;
                 for (RList i = this; i != null; i = i.next)
                 {
                     a++;
@@ -73,7 +73,7 @@ namespace Lab2
         #region 10.Метод додавання нового елементу у список після елемента із заданим значенням
         public void Insert(int m, int n)
         {
-            for (RList i = this; i != null; i = i.next)
+            for (RList i = this.next; i != null; i = i.next)
             {
                 if (i.key == n)
                 {
@@ -103,32 +103,22 @@ namespace Lab2
         #region 16.Рекурсивний метод видалення n-ного за рахунком елемента
         public void DeleteNum(int n)
         {
-            if (n == 1)
+            if (n != 1)
             {
-                for (RList i = this; i.next != null; i = i.next)
-                {
-                    i.key = i.next.key;
-                }
-                this.Delete();
+                this.next.DeleteNum(--n);
             }
             else
             {
-                if (n == this.Length)
-                {
-                    this.Delete();
-                }
-                else
-                {
-                    this.next.DeleteNum(--n);
-                }
+                RList t = this.next.next;
+                this.next = t;
             }
         }
         #endregion
 
         #region 30.Не рекурсивний метод друку всіх непарних значень елементів списку;
-        public static void PrintOdd(RList rl)
+        public void PrintOdd()
         {
-            for (RList i = rl; i != null; i = i.next)
+            for (RList i = this.next; i != null; i = i.next)
             {
                 if (i.key % 2 != 0)
                 {
@@ -139,13 +129,13 @@ namespace Lab2
         #endregion
 
         #region 41.Метод пошуку елемента із заданим значенням (результат - номер знайденого елемента у списку)
-        public static void Search(RList rl, int n)
+        public void Search(int n)
         {
-            for (RList i = rl; i != null; i = i.next)
+            for (RList i =  this.next; i != null; i = i.next)
             {
                 if (i.key == n)
                 {
-                    Console.WriteLine(rl.Length - i.Length + 1);
+                    Console.WriteLine(this.Length - i.Length );
                 }
             }
         }
@@ -154,18 +144,27 @@ namespace Lab2
         #region Переопределить две любых операции.
         public static int operator +(RList rl1, RList rl2)
         {
-            return rl1.key + rl2.key;
+            int res = 0;
+            for (RList i = rl1; i != null; i=i.next)
+            {
+                res += i.key;
+            }
+            for (RList i = rl2; i != null; i = i.next)
+            {
+                res += i.key;
+            }
+            return res;
         }
-        public static int operator *(RList rl1, RList rl2)
+        public static RList operator ++(RList rl)
         {
-            return rl1.key * rl2.key;
+            return rl.next;
         }
         #endregion
 
         #region Печать
         public void Print()
         {
-            for (RList i = this; i != null; i = i.next)
+            for (RList i = this.next; i != null; i = i.next)
             {
                 Console.WriteLine(i.key);
             }
@@ -176,14 +175,14 @@ namespace Lab2
     {
         public static void Main()
         {
-            RList rl = new RList(1);
+            RList rl = new RList(0);
+            rl.Add(1);
             rl.Add(2);
             rl.Add(3);
             rl.Add(4);
             rl.Add(5);
-            rl.Insert(10, 4);
-            rl.DeleteNum(3);
-            rl.Print();            
+            
+            rl.Print(); 
         }
     }
 }
