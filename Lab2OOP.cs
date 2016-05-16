@@ -89,29 +89,43 @@ namespace Lab2
         #region 15.Рекурсивний метод видалення останнього в списку елемента
         public void Delete()
         {
-            if (this.next.next != null)
+            if (this.next != null)
             {
-                this.next.Delete();
+                if (this.next.next != null)
+                {
+                    this.next.Delete();
+                }
+                else
+                {
+                    this.next = null;
+                }
             }
             else
             {
-                this.next = null;
-            }
+                Console.Write("Список пуст!");
+            }            
         }
         #endregion
 
         #region 16.Рекурсивний метод видалення n-ного за рахунком елемента
         public void DeleteNum(int n)
         {
-            if (n != 1)
+            if (n<0 || n > Length)
             {
-                this.next.DeleteNum(--n);
+                Console.WriteLine("Элемент не существует!");
             }
             else
             {
-                RList t = this.next.next;
-                this.next = t;
-            }
+                if (n != 1)
+                {
+                    this.next.DeleteNum(--n);
+                }
+                else
+                {
+                    RList t = this.next.next;
+                    this.next = t;
+                }
+            }            
         }
         #endregion
 
@@ -122,22 +136,23 @@ namespace Lab2
             {
                 if (i.key % 2 != 0)
                 {
-                    Console.WriteLine(i.key);
+                    Console.Write(i.key+" ");
                 }
             }
         }
         #endregion
 
         #region 41.Метод пошуку елемента із заданим значенням (результат - номер знайденого елемента у списку)
-        public void Search(int n)
+        public int Search(int n)
         {
             for (RList i =  this.next; i != null; i = i.next)
             {
                 if (i.key == n)
                 {
-                    Console.WriteLine(this.Length - i.Length );
+                    return this.Length - i.Length ;
                 }
             }
+            return -1;
         }
         #endregion
 
@@ -155,9 +170,15 @@ namespace Lab2
             }
             return res;
         }
-        public static RList operator ++(RList rl)
+        
+
+        public static RList operator *(RList rl, int a)
         {
-            return rl.next;
+            for (RList i = rl; i != null; i = i.next)
+            {
+                i.key *= a; 
+            }
+            return rl;
         }
         #endregion
 
@@ -166,7 +187,33 @@ namespace Lab2
         {
             for (RList i = this.next; i != null; i = i.next)
             {
-                Console.WriteLine(i.key);
+                Console.Write(i.key+" ");
+            }
+            Console.WriteLine();
+        }
+        #endregion
+
+        #region 20.Рекурсивний метод видалення всіх елементів із заданим значенням
+        public void DeleteElements(int n)
+        {
+            if (next != null)
+            {
+                if (next.key == n)
+                {
+                    if (next.next != null)
+                    {
+                        next = next.next;
+                        next.DeleteElements(n);
+                    }
+                    else
+                    {
+                        Delete();
+                    }
+                }
+                else
+                {                
+                    next.DeleteElements(n);                               
+                }
             }
         }
         #endregion
@@ -175,14 +222,24 @@ namespace Lab2
     {
         public static void Main()
         {
+            //#20
             RList rl = new RList(0);
-            rl.Add(1);
-            rl.Add(2);
-            rl.Add(3);
-            rl.Add(4);
-            rl.Add(5);
-            
-            rl.Print(); 
+            rl.Add(70);
+            rl.Add(10);
+            rl.Add(70);
+            rl.Add(30);
+            rl.Add(70);
+            //rl.Print();
+            //rl.Length = 3;
+            //Console.WriteLine(rl.Length);
+            //rl.Print();
+            //RList r2 = new RList(0);
+            //r2.Add(10);
+            //Console.WriteLine(rl + r2);
+            //Console.WriteLine(rl.Search(70));
+            //rl.DeleteNum(200);
+            rl.DeleteElements(75);
+            rl.Print();
         }
     }
 }
