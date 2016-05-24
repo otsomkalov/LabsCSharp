@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+//Стэк, односвязный список, очередь С#
+//Stack, queue, singly linked list C#
 namespace ConsoleApplication1
     {
         class Stack

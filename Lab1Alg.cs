@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-
+//Сортировка вставками, выбором и цифровая сортировка на C#
+//Insertion, selection and numeric sort C#
 namespace ConsoleApplication1
 {
     class Lab1Alg

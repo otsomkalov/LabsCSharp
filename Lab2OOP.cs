@@ -1,5 +1,5 @@
 ﻿using System;
-
+//Singly linked list C#
 namespace Lab2
 {
     //18.		1,3 , 6, 10, 15, 16, 30, 41, 47
