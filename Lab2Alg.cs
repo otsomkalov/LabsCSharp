@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-//Стэк, односвязный список, очередь С#
+//РЎС‚РµРє, РѕС‡РµСЂРµРґСЊ, РѕРґРЅРѕСЃРІСЏР·РЅС‹Р№ СЃРїРёСЃРѕРє C#
 //Stack, queue, singly linked list C#
 namespace ConsoleApplication1
     {
