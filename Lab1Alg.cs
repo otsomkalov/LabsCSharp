@@ -20,7 +20,6 @@ namespace ConsoleApplication1
                     }
                 }
             }
-
         }
 
         static void sel(int[] a)
